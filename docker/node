@@ -1,0 +1,5 @@
+FROM node:{{ version }}
+
+RUN {{ step }}
+
+CMD {{ command }}
