@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  api:
+    image: gigz-api
+
+    build: .
+    container_name: gigz-api
+
+    restart: always
+    command: npm run dev
+
+    ports:
+      - 3000:3000
+
+    env_file: .env
+
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./prisma:/usr/src/app/prisma
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./static:/usr/src/app/static
+
+    depends_on:
+      - database
+
+  adminer:
+    image: adminer
+    container_name: gigz-adminer
+
+    restart: always
+
+    ports:
+      - 5555:8080
+
+    links:
+      - database:db
+
+  database:
+    image: mysql:8.0
+    container_name: gigz-database
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gigz
+
+    volumes:
+      - database-data:/var/lib/mysql
+      - ./scripts:/gigz-scripts
+
+volumes:
+  database-data:
