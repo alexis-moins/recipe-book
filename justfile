@@ -3,13 +3,13 @@ set dotenv-load
 PORT := "3000"
 
 up *FLAGS:
-    docker compose up -d {{FLAGS}}
+    @docker compose up -d {{FLAGS}}
 
 re *FLAGS:
     docker compose down && docker compose up -d {{FLAGS}}
 
 down:
-    docker compose down
+    @docker compose down
 
 build SERVICE *FLAGS:
     docker compose build {{SERVICE}} {{FLAGS}}
