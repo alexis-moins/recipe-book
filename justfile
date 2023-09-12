@@ -1,5 +1,6 @@
 set dotenv-load
 
+BACKEND := "server"
 PORT := "3000"
 
 up *FLAGS:
@@ -15,10 +16,10 @@ build SERVICE *FLAGS:
     docker compose build {{SERVICE}} {{FLAGS}}
 
 logs SERVICE:
-    docker compose logs {{SERVICE}} -f
+    @docker compose logs {{SERVICE}} -f
 
 exec +COMMAND:
-    docker compose exec api {{COMMAND}}
+    docker compose exec {{BACKEND}} {{COMMAND}}
 
 shell SERVICE SHELL='bash':
     @docker compose exec -it {{SERVICE}} {{SHELL}}
@@ -27,10 +28,10 @@ fetch URL *FLAGS:
     @-httpx http://localhost:{{PORT}}/api/{{URL}} --auth $API_USERNAME $API_PASSWORD {{FLAGS}}
 
 prisma +COMMAND:
-    @docker compose exec api yarn prisma {{COMMAND}}
+    @docker compose exec {{BACKEND}} yarn prisma {{COMMAND}}
 
 migrate:
-    @docker compose exec api yarn prisma migrate dev
+    @docker compose exec {{BACKEND}} yarn prisma migrate dev
 
 db:
     @docker compose exec -it database mysql -u root -p
