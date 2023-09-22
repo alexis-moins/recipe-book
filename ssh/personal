@@ -1,3 +1,4 @@
+# vim: ft=sshconfig
 Host *
     AddKeysToAgent yes
     UseKeychain yes
