@@ -25,6 +25,9 @@ shell SERVICE SHELL='sh':
 routes:
     @docker compose exec -it {{API_SERVICE}} mix phx.routes
 
+iex:
+    @docker compose exec -it {{API_SERVICE}} iex -S mix
+
 migrate:
     @docker compose exec {{API_SERVICE}} mix ecto.migrate
 
