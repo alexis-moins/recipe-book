@@ -1,7 +1,7 @@
 BACKEND_SERVICE := "back"
 DATABASE_SERVICE := "database"
 
-MIGRATE_COMMAND := "npx prisma migrate"
+MIGRATE_COMMAND := "npx prisma migrate dev"
 DATABASE_ACCESS_COMMAND := "mysql -u root -p"
 
 up *FLAGS:
@@ -22,8 +22,17 @@ logs SERVICE:
 exec +COMMAND:
     @docker compose exec {{BACKEND_SERVICE}} {{COMMAND}}
 
+prisma +COMMAND:
+    @docker compose exec {{BACKEND_SERVICE}} npx prisma {{COMMAND}}
+
 shell SERVICE SHELL='sh':
     @docker compose exec -it {{SERVICE}} {{SHELL}}
+
+reset:
+    @docker compose down --volumes
+
+update SERVICE:
+    @docker compose up {{SERVICE}} -d
 
 migrate:
     @docker compose exec {{BACKEND_SERVICE}} {{MIGRATE_COMMAND}}
