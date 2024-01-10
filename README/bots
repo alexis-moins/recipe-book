@@ -1,0 +1,41 @@
+# Training
+
+## 🚀 Setup
+
+Navigate to the [training](.) directory
+```bash
+cd functions/training/
+```
+
+Create a virtual environment for python 3.11 using the [venv](https://docs.python.org/3/library/venv.html) module
+```bash
+python3 -m venv .venv
+```
+
+Activate the virtual environment
+```bash
+source .venv/bin/activate
+```
+
+Install the dependencies
+```bash
+pip install -r requirements.txt
+```
+
+## 🚦 Environment
+
+You must set environment variables in a `.env` file at the root of the project. To do so, copy the local [.env](.env.local) file and optionally change its content.
+```bash
+cp .env.local .env
+```
+
+## 🧰 Settings
+
+You can change how the training is done by tweaking your .env file's `FREQUENCY` and `START_DATE`. See the local [.env](.env.local) file for more information about each variable's purpose.
+
+## 🛎️ Running
+
+First ensure that your virtual environment is activated, then launch the [main.py](main.py) file using your python interpreter.
+
+> Note that you need to have the global docker compose environment for the bots running as explained in the repository's general [README](../../README.md).
+
