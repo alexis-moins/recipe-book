@@ -1,0 +1,14 @@
+PROJECT := "LittleKingdom"
+
+alias w := watch
+alias b := build
+alias e := exec
+
+watch:
+    @dune build -w
+
+exec:
+    @dune exec {{PROJECT}}
+
+build:
+    @dune build
